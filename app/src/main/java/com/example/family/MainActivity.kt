@@ -5,22 +5,31 @@ import android.os.Bundle
 import com.example.family.fragment.GuardFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeScreen : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home_screen)
+        setContentView(R.layout.activity_main)
 
-        var bottomBar = findViewById<BottomNavigationView>(R.id.bottom_bar)
+        val bottomBar = findViewById<BottomNavigationView>(R.id.bottom_bar)
 
         bottomBar.setOnItemSelectedListener {
 
-            inflateFragment()
+            if(it.itemId == R.id.nav_guard){
+                inflateGuardFragment()
+            }else if (it.itemId ==R.id.nav_home){
+                inflateHomeFragment()
+            }
 
-            false
+
+            true
         }
     }
 
-    private fun inflateFragment() {
+    private fun inflateHomeFragment() {
+
+    }
+
+    private fun inflateGuardFragment() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, GuardFragment.newInstance())
         transaction.commit()
